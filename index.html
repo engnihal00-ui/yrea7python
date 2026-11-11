@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book Week Code Quest – Year 7 ICT</title>
+<style>
+:root{--bg:#f1eeff;--card:#fff;--tx:#1b1740;--mu:#5a5686;--p:#6a3df0;--p2:#ff4f9a;--y:#ffc933;--ok:#14a05a;--bad:#e0383e;--ln:#d9d2ff;--code:#1b1740;--codetx:#c9ffe0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#120f2a;--card:#201b4a;--tx:#f1eeff;--mu:#b5afe6;--ln:#3a3380;--code:#0b0920;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#120f2a;--card:#201b4a;--tx:#f1eeff;--mu:#b5afe6;--ln:#3a3380;--code:#0b0920;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:18px/1.5 "Trebuchet MS","Segoe UI",system-ui,sans-serif}
+header{background:linear-gradient(120deg,#6a3df0,#ff4f9a);color:#fff;padding:12px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+header h1{margin:0;font-size:1.4rem}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+nav button,.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:10px 18px;cursor:pointer;background:var(--card);color:var(--p);transition:transform .15s}
+nav button.on{background:var(--y);color:#1b1740}
+.btn{background:linear-gradient(120deg,var(--p),var(--p2));color:#fff}
+.btn.alt{background:var(--card);color:var(--p);border:2px solid var(--p)}
+.btn.big{font-size:1.3rem;padding:14px 30px}
+.btn:hover,nav button:hover{transform:translateY(-2px)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+main{max-width:1200px;margin:0 auto;padding:16px}
+.tab{display:none}.tab.on{display:block}
+.card{background:var(--card);border:2px solid var(--ln);border-radius:20px;padding:18px;margin-bottom:16px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.hero{display:flex;flex-wrap:wrap;gap:20px;align-items:center;background:linear-gradient(135deg,#2a1f78,#6a3df0 60%,#ff4f9a);color:#fff;border-radius:24px;padding:26px;margin-bottom:16px}
+.hero h2{font-size:2.2rem;line-height:1.1;margin:.2em 0}
+.ill{font-size:3.4rem;letter-spacing:8px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.chip{display:inline-block;background:var(--ln);color:var(--tx);border-radius:999px;padding:4px 14px;margin:3px;font-weight:700}
+.sub{color:var(--mu)}
+input[type=text],select,textarea{font:inherit;padding:10px;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--tx);width:100%}
+.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:10px}
+.opts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.opt{font:inherit;font-weight:700;text-align:left;padding:16px;border-radius:16px;border:3px solid var(--ln);background:var(--card);color:var(--tx);cursor:pointer}
+.opt:hover{border-color:var(--p)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff;animation:pop .5s}
+.opt.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.dis{pointer-events:none}
+@keyframes pop{50%{transform:scale(1.05)}}
+.fb{border-radius:16px;padding:14px;margin-top:14px}
+.fb.ok{background:#dff7e9;color:#0b4a2a;border:3px solid var(--ok);animation:pop .5s}
+.fb.bad{background:#ffe6e7;color:#6b1418;border:3px solid var(--bad)}
+.bar{height:16px;background:var(--ln);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .6s}
+.team{display:grid;gap:4px;padding:12px;border:2px solid var(--ln);border-radius:16px;margin-bottom:10px}
+.team.cur{border-color:var(--y);box-shadow:0 0 0 3px var(--y)}
+.slot{min-height:48px;border:3px dashed var(--ln);border-radius:12px;padding:8px;font-weight:700}
+.slot.f{border-style:solid;border-color:var(--p)}
+.mrow{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;align-items:center;margin-bottom:8px}
+.mrow>b{background:var(--ln);padding:12px;border-radius:12px}
+pre{background:var(--code);color:var(--codetx);padding:16px;border-radius:16px;overflow-x:auto;font:14px/1.5 Consolas,"Courier New",monospace;max-height:480px}
+table{border-collapse:collapse;width:100%}td,th{border:2px solid var(--ln);padding:8px;text-align:left}
+.pause{position:fixed;inset:0;background:rgba(18,15,42,.9);color:#fff;display:none;align-items:center;justify-content:center;font-size:3rem;z-index:20;text-align:center}
+.chart{display:flex;align-items:flex-end;gap:12px;height:150px;padding-top:10px}
+.chart div{flex:1;background:linear-gradient(0deg,var(--p),var(--p2));border-radius:10px 10px 0 0;color:#fff;text-align:center;font-weight:700;min-height:22px;font-size:.9rem}
+.win{font-size:1.8rem;text-align:center;background:linear-gradient(120deg,var(--y),#ff9a3c);color:#1b1740;border-radius:20px;padding:20px;margin-bottom:14px}
+.tm{display:flex;gap:6px;align-items:center;background:rgba(0,0,0,.28);border-radius:14px;padding:6px 12px;font-weight:700;flex-wrap:wrap}.tm b{font-size:1.6rem;font-variant-numeric:tabular-nums;min-width:4.2ch}.tm button{font:inherit;border:0;border-radius:10px;padding:4px 10px;cursor:pointer}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header><h1>🤖 Book Week Code Quest <span style="font-weight:400">· Year 7 ICT</span></h1>
+<nav><button class="on" data-t="screen">📺 Screen</button><button data-t="game">🎮 Assessment game</button><button data-t="prac">🐍 Practical task</button><button id="snd" title="Sound on/off">🔊</button></nav><div class="tm"><span id="hd"></span><span>⏱</span><b id="tv">30:00</b><button id="tb" aria-label="Start or pause timer">▶</button><button id="tr" aria-label="Reset timer">↺</button></div></header>
+<main>
+<section id="screen" class="tab on">
+<div class="hero"><div style="flex:1;min-width:260px"><span class="chip">Cambridge Lower Secondary Computing · 7CT.02</span>
+<h2>Book Week: Plan a Tech Solution</h2><p>ICT · Year 7 · Week 9 · <span id="dt"></span> · Cairo West International Schools</p>
+<p style="font-size:1.3rem"><b>Think about it:</b> some pupils struggle to choose a book. How could technology help?</p>
+<button class="btn big" style="background:var(--y);color:#1b1740" data-go="game">🚀 START GAME</button></div><div class="ill">📚💻🤖⭐</div></div>
+<div class="card" style="background:linear-gradient(120deg,#ffc933,#ff9a3c);color:#1b1740;border-color:transparent"><h3 style="margin-top:0">🌟 Value of the month (<span id="vm"></span>): Respect</h3><p style="font-size:1.4rem;margin:0"><i>“Respect means listening to others the way you want to be heard.”</i></p></div>
+<div class="grid"><div class="card"><h3>🎯 Today I can…</h3><ul><li>Find a problem linked to Book Week.</li><li>Think of at least two tech solutions.</li><li>Choose one idea and say why it is useful.</li><li>Plan the main features with a flowchart or storyboard.</li><li>Build a small PictoBlox prototype.</li><li>Explain how my solution helps its users.</li></ul></div>
+<div class="card"><h3>🔤 Key vocabulary</h3><div id="vocab"></div><h3>💪 Team message</h3><p>Great programmers talk, test and improve. Work as a pair, listen to each other and learn from every mistake!</p></div></div>
+</section>
+
+<section id="game" class="tab">
+<div class="grid" style="grid-template-columns:2fr 1fr;align-items:start">
+<div>
+<div class="card" id="reg"><h3>👫 Register your pairs</h3>
+<div class="row"><input type="text" id="s1" placeholder="Student 1 name" aria-label="Student 1"><input type="text" id="s2" placeholder="Student 2 name" aria-label="Student 2"><input type="text" id="tn" placeholder="Team name" aria-label="Team name"></div>
+<button class="btn" id="addT">➕ ADD TEAM</button> <button class="btn big" id="startG">▶ Start the game</button><p id="regmsg" class="sub"></p></div>
+<div class="card" id="qcard" style="display:none"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b id="qn"></b><span id="qmeta"></span></div>
+<div class="bar" style="margin:8px 0"><i id="pb" style="width:0"></i></div>
+<p id="who" style="font-weight:700;color:var(--p2)"></p>
+<h2 id="qtext" style="margin:.3em 0"></h2><div id="ans"></div><div id="fb"></div>
+<p><button class="btn big" id="next" style="display:none">Next question ➡</button></p></div>
+<div id="results" style="display:none"></div>
+<details class="card"><summary><b>🧑‍🏫 Teacher dashboard</b></summary>
+<p><button class="btn alt" id="pauseB">⏸ Pause</button> <button class="btn alt" id="prevB">⬅ Previous</button> <button class="btn alt" id="nextB">Next ➡</button> <button class="btn alt" id="showA">👁 Show answer</button> <button class="btn alt" id="finB">🏁 Final results</button> <button class="btn alt" id="resetB">🔄 Reset</button></p>
+<p>Answering team: <select id="curT" style="width:auto"></select></p><p class="sub">Teams rotate each question. Each question scores once. Points: easy 10, medium 20, challenge 30.</p><div id="manage"></div></details>
+</div>
+<div><div class="card"><h3>🏆 Live scoreboard</h3><div id="board"><p class="sub">Add a team to begin.</p></div><div class="chart" id="chart"></div></div></div>
+</div></section>
+
+<section id="prac" class="tab">
+<div class="hero"><div style="flex:1;min-width:260px"><span class="chip">25-minute practical</span><h2>BOOK EXPLORER: Discover Your Favourite Author</h2><p><b>Learning objective:</b> write a Python program that uses input(), print(), variables, functions and if/else to find a book’s author.</p></div><div class="ill">📖🐍🔎</div></div>
+<div class="grid"><div class="card"><h3>⏱ 25-minute plan</h3><table><tr><th>Time</th><th>Activity</th></tr><tr><td>5 min</td><td>Meet the project and read the program</td></tr><tr><td>5 min</td><td>Type the code; find the variables and input</td></tr><tr><td>10 min</td><td>Run it, test a book title, fix bugs</td></tr><tr><td>5 min</td><td>Improve the output and demonstrate</td></tr></table>
+<h3>🪜 Steps</h3><ol><li>Open IDLE, Thonny or an online Python editor.</li><li>Copy the code (button below) and paste it into a new file.</li><li>Save it as <b>book_explorer.py</b> and press Run (F5).</li><li>Type a book title, e.g. <i>Alice’s Adventures in Wonderland</i>.</li><li>Test three different books and a made-up title.</li></ol>
+<p class="sub">Uses the free <b>Open Library</b> service: no account or API key needed. If the internet fails, the program switches to clearly labelled <b>SAMPLE</b> demo data. (Gemini would need a private API key kept in an environment variable, never typed into shared code.)</p></div>
+<div class="card"><h3>💻 Expected output</h3><pre id="exp"></pre><h3>✅ Testing checklist</h3><div id="cl"></div><h3>⭐ Extension</h3><p>Ask for a second book and compare authors, or show a “Year 7 reading tip” with if/else.</p></div></div>
+<div class="card"><h3>🐍 Python code</h3><p><button class="btn" id="copy">📋 Copy code</button> <span id="cmsg" class="sub"></span></p><pre id="code"></pre>
+<h3>🔍 What the important lines do</h3><ul><li><b>input()</b> asks the user to type a book title and stores it in the variable <b>title</b>.</li><li><b>def get_json(url)</b> is a function that fetches data from a website.</li><li><b>try / except</b> catches an internet problem, so the program does not crash.</li><li><b>if info is None</b> is a decision: if no book was found, say sorry.</li><li><b>for … in</b> prints every fact or book in a list.</li></ul></div>
+</section>
+</main>
+<div class="pause" id="pauseO"><div>⏸ Paused<br><small>Teacher will resume shortly</small></div></div>
+<script>
+const $=s=>document.querySelector(s),sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const LO=["Identify a Book Week problem","Generate two or more solutions","Choose an idea and say why","Plan features (flowchart/storyboard)","Build and test a PictoBlox prototype","Explain how it helps users"];
+const Q=[
+{t:"mc",d:0,lo:0,q:"Some pupils struggle to choose a book. In the design process, this is the…",o:["problem","prototype","output","flowchart"],a:"problem",e:"A problem is something difficult for people. We always start by finding the problem."},
+{t:"tf",d:0,lo:5,q:"The <b>user</b> is the person who will use your technology solution.",a:"True",e:"Users are the people your solution is made to help."},
+{t:"mc",d:0,lo:0,q:"Which step comes <b>first</b> in the design process?",o:["Identify the problem","Build the prototype","Test it","Improve it"],a:"Identify the problem",e:"Problem → ideas → choose → plan → prototype → test."},
+{t:"order",d:1,lo:3,q:"Put the design steps in the correct order.",a:["Problem","Ideas","Choose","Plan","Prototype","Test"],e:"We find the problem, think of ideas, choose one, plan it, build a prototype, then test."},
+{t:"match",d:1,lo:4,q:"Match each word to its meaning.",p:[["Prototype","A small first version you can try"],["Feature","Something your solution can do"],["Storyboard","Pictures showing screens in order"],["Algorithm","Step-by-step instructions"]],e:"These four words describe the plan and build stages."},
+{t:"fill",d:1,lo:4,q:"When the user types an answer after <b>ask and wait</b>, that is an ______.",o:["input","output","algorithm","storyboard"],a:"input",e:"Input is data going into the program. What the sprite says is output."},
+{t:"mc",d:1,lo:4,q:"🧑‍💻 Sam’s sprite must say “Read Treasure Island” if the answer is yes, and “Read Diary” if not. Which block should he use?",o:["if … then … else","forever","go to x: y:","play sound"],a:"if … then … else",e:"An if/else block chooses between two outcomes."},
+{t:"match",d:1,lo:3,q:"Match each flowchart shape to its job.",p:[["Oval","Start / End"],["Parallelogram","Input / Output"],["Rectangle","Process (an action)"],["Diamond","Decision (yes / no)"]],e:"Flowchart symbols (7CT.02): oval, parallelogram, rectangle and diamond."},
+{t:"mc",d:0,lo:4,q:"🧒⌨️ → 📖 A pupil types “adventure” into the Book Finder. This is…",o:["input","output","a prototype","a feature"],a:"input",e:"Typing into a program is input."},
+{t:"mc",d:1,lo:0,q:"🔍 Mia wrote: “The problem is: make a quiz game.” What is the mistake?",o:["It describes a solution, not a problem","It has no capital letter","It is too long","Problems must be about sport"],a:"It describes a solution, not a problem",e:"A problem says what is hard for users, e.g. “Pupils cannot choose a book.”"},
+{t:"tf",d:1,lo:4,q:"You only need to test <b>one</b> answer in an if/else program.",a:"False",e:"Test every option (yes AND no) so both paths work."},
+{t:"mc",d:2,lo:4,q:"🐞 Mia’s Recommendation Helper says “Read book A” every time, even when the user types “no”. Most likely cause?",o:["The answer check or else part is missing or wrong","The backdrop is the wrong colour","The sprite is too small","The project was not saved"],a:"The answer check or else part is missing or wrong",e:"The if/else decides the reply. Testing all options helps you find this bug."},
+{t:"order",d:2,lo:4,q:"Put the PictoBlox build steps in order.",a:["Set up sprite and backdrop","Add the ask question block","Add if/else response","Test all options","Make one improvement and save"],e:"Build in small steps, then test every option and improve."},
+{t:"mc",d:2,lo:3,q:"Why do we draw a flowchart or storyboard <b>before</b> building?",o:["To plan the steps and features so building is easier","To make the program run faster","PictoBlox cannot start without one","So we never need to test"],a:"To plan the steps and features so building is easier",e:"Planning shows the order of steps and features before you build."},
+{t:"mc",d:2,lo:1,q:"🏆 Challenge: pupils cannot find library books. Which pair gives <b>two different</b> solutions?",o:["A Library Guide and a Book Finder quiz","Two identical Book Finders","A Library Guide and a Library Guide","Only one idea is allowed"],a:"A Library Guide and a Book Finder quiz",e:"Idea generation means at least two different possible solutions."},
+{t:"fill",d:1,lo:2,q:"I choose this idea because it helps the ______.",o:["user","keyboard","screen-saver","sprite’s hat"],a:"user",e:"A good idea is chosen because it is useful to its users."},
+{t:"mc",d:2,lo:5,q:"Which sentence best explains how a solution helps its users?",o:["My Book Finder helps pupils choose a book quickly by asking what they like.","My project has a cool sprite.","I used lots of blocks.","It took me 13 minutes."],a:"My Book Finder helps pupils choose a book quickly by asking what they like.",e:"Say who is helped and how."},
+{t:"tf",d:0,lo:4,q:"A prototype must be the finished, perfect product.",a:"False",e:"A prototype is a first small version that you test and improve."}];
+Q.forEach((q,i)=>{if(q.o){const c=q.a,r=sh(q.o.filter(x=>x!=c));r.splice(i%q.o.length,0,c);q.o=r}if(q.t=="order")do q.s=sh(q.a);while(q.s.join()==q.a.join());if(q.t=="match")q.s=sh(q.p.map(x=>x[1]))});
+const PTS=[10,20,30],DN=["Easy","Medium","Challenge"],MSG=["Excellent! You got it!","Great teamwork!"];
+let teams=[],log=[],qi=0,cur=0,paused=false,started=false,sound=true,st={};
+const ctx=window.AudioContext?new AudioContext():null;
+function beep(ok){if(!sound||!ctx)return;try{[ok?[523,659,784]:[220,180]][0].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;o.connect(g);g.connect(ctx.destination);g.gain.value=.08;o.start(ctx.currentTime+i*.12);o.stop(ctx.currentTime+i*.12+.1)})}catch(e){}}
+const scr=t=>log.filter(l=>l.team==t).reduce((a,l)=>a+l.pts,0),cnt=(t,k)=>log.filter(l=>l.team==t&&l.ok==k).length;
+$("#dt").textContent=new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+$("#vocab").innerHTML="problem,technology solution,user,audience,idea generation,design,prototype,feature,algorithm,input,output,interaction,storyboard,flowchart,test,improve".split(",").map(x=>`<span class="chip">${x}</span>`).join("");
+function go(t){document.querySelectorAll(".tab").forEach(e=>e.classList.toggle("on",e.id==t));document.querySelectorAll("nav button[data-t]").forEach(b=>b.classList.toggle("on",b.dataset.t==t));scrollTo(0,0);tickReset(t)}
+document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>go(b.dataset.t));document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+$("#snd").onclick=()=>{sound=!sound;$("#snd").textContent=sound?"🔊":"🔇"};
+function addTeam(){const a=$("#s1").value.trim(),b=$("#s2").value.trim(),n=$("#tn").value.trim();if(!a||!b||!n){$("#regmsg").textContent="Please fill in both names and a team name.";return}teams.push({a,b,n});["#s1","#s2","#tn"].forEach(x=>$(x).value="");$("#regmsg").textContent="Team added! Add more pairs or start.";refresh()}
+$("#addT").onclick=addTeam;
+$("#startG").onclick=()=>{if(!teams.length){$("#regmsg").textContent="Add at least one team first.";return}started=true;$("#reg").style.display="none";$("#qcard").style.display="block";cur=qi%teams.length;showQ();beep(1)};
+function refresh(){
+ const per=Math.ceil(Q.length/Math.max(teams.length,1)),rk=teams.map((t,i)=>i).sort((x,y)=>scr(y)-scr(x));
+ $("#board").innerHTML=teams.length?rk.map((i,r)=>{const t=teams[i],n=log.filter(l=>l.team==i).length;return`<div class="team ${i==cur&&started?"cur":""}"><b>#${r+1} ${t.n}</b> <span class="sub">${t.a} &amp; ${t.b}</span><span>⭐ <b>${scr(i)}</b> pts · ✅ ${cnt(i,1)} · ❌ ${cnt(i,0)} · done ${n}</span><div class="bar"><i style="width:${Math.min(100,n/per*100)}%"></i></div></div>`}).join(""):'<p class="sub">Add a team to begin.</p>';
+ const mx=Math.max(1,...teams.map((t,i)=>scr(i)));$("#chart").innerHTML=teams.map((t,i)=>`<div title="${t.n}" style="height:${Math.max(15,scr(i)/mx*100)}%">${scr(i)}<br>${t.n.slice(0,8)}</div>`).join("");
+ $("#curT").innerHTML=teams.map((t,i)=>`<option value="${i}" ${i==cur?"selected":""}>${t.n}</option>`).join("");
+ $("#manage").innerHTML=log.length?"":teams.map((t,i)=>`<button class="btn alt" data-rm="${i}">🗑 ${t.n}</button> `).join("");
+ document.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{teams.splice(+b.dataset.rm,1);refresh()});
+}
+$("#curT").onchange=e=>{cur=+e.target.value;if(started&&!log.find(l=>l.q==qi))showQ();refresh()};
+function showQ(){const q=Q[qi],d=log.find(l=>l.q==qi);
+ $("#qn").textContent=`Question ${qi+1} of ${Q.length}`;$("#qmeta").innerHTML=`<span class="chip">${DN[q.d]} · ${PTS[q.d]} pts</span>`;
+ $("#pb").style.width=log.length/Q.length*100+"%";$("#who").textContent=`🎤 Answering now: ${teams[d?d.team:cur].n}`;
+ $("#qtext").innerHTML=q.q;$("#fb").innerHTML="";$("#next").style.display="none";st={sel:null,m:{},ch:[]};draw();if(d)fb(d);refresh()}
+function draw(){const q=Q[qi],d=log.find(l=>l.q==qi),b=$("#ans");let h="";
+ if(q.t=="mc"||q.t=="fill"||q.t=="tf"){const o=q.t=="tf"?["True","False"]:q.o;h=`<div class="opts">${o.map((x,i)=>`<button class="opt ${d&&x==q.a?"ok":d&&x==d.g?"bad":""}" data-i="${i}">${x}</button>`).join("")}</div>`}
+ else if(q.t=="order"){const rest=q.s.filter(x=>!st.ch.includes(x));h=`<p><b>Your order:</b> ${st.ch.map((x,i)=>`<span class="chip">${i+1}. ${x}</span>`).join("")||"<span class=sub>Tap the steps in order…</span>"}</p><div class="opts">${rest.map(x=>`<button class="opt" data-v="${x}">${x}</button>`).join("")}</div><p><button class="btn alt" id="undo">↩ Undo</button> ${st.ch.length==q.a.length&&!d?'<button class="btn" id="chk">✔ Check</button>':""}</p>`}
+ else{const used=Object.values(st.m),pool=q.s.filter(x=>!used.includes(x));h=`<p class="sub">Drag a meaning onto a word (or tap a meaning, then tap a word). Tap a filled box to clear it.</p>`+q.p.map((p,i)=>`<div class="mrow"><b>${p[0]}</b><div class="slot ${st.m[i]?"f":""}" data-s="${i}">${st.m[i]||"drop here"}</div></div>`).join("")+`<div class="opts">${pool.map(x=>`<button class="opt ${st.sel==x?"ok":""}" draggable="true" data-c="${x}">${x}</button>`).join("")}</div>${Object.keys(st.m).length==q.p.length&&!d?'<p><button class="btn" id="chk">✔ Check</button></p>':""}`}
+ b.innerHTML=h;b.className=d?"dis":"";
+ b.querySelectorAll("[data-i]").forEach(x=>x.onclick=()=>{const o=q.t=="tf"?["True","False"]:q.o,g=o[+x.dataset.i];submit(g==q.a,g)});
+ b.querySelectorAll("[data-v]").forEach(x=>x.onclick=()=>{st.ch.push(x.dataset.v);draw()});
+ if($("#undo"))$("#undo").onclick=()=>{st.ch.pop();draw()};
+ if($("#chk"))$("#chk").onclick=()=>q.t=="order"?submit(st.ch.join()==q.a.join(),st.ch.join(" → ")):submit(q.p.every((p,i)=>st.m[i]==p[1]),"matching");
+ b.querySelectorAll("[data-c]").forEach(x=>{x.onclick=()=>{st.sel=st.sel==x.dataset.c?null:x.dataset.c;draw()};x.ondragstart=e=>e.dataTransfer.setData("text",x.dataset.c)});
+ b.querySelectorAll("[data-s]").forEach(s=>{const i=s.dataset.s,put=v=>{if(v){st.m[i]=v;st.sel=null}else delete st.m[i];draw()};s.onclick=()=>put(st.m[i]?null:st.sel);s.ondragover=e=>e.preventDefault();s.ondrop=e=>{e.preventDefault();put(e.dataTransfer.getData("text"))}})}
+function submit(ok,g){if(log.find(l=>l.q==qi)||paused)return;const e={q:qi,team:cur,ok:ok?1:0,pts:ok?PTS[Q[qi].d]:0,g};log.push(e);beep(ok);draw();fb(e);refresh();$("#pb").style.width=log.length/Q.length*100+"%"}
+function ansText(q){return q.t=="order"?q.a.join(" → "):q.t=="match"?q.p.map(x=>x[0]+" = "+x[1]).join("; "):q.a}
+function fb(e){const q=Q[e.q];$("#fb").innerHTML=e.ok?`<div class="fb ok"><b style="font-size:1.4rem">🎉 ${MSG[e.q%2]} +${e.pts} points</b><br>${q.e}</div>`:`<div class="fb bad"><b>Almost there! Let’s learn from this mistake.</b><br>Correct answer: <b>${ansText(q)}</b><br>${q.e}</div>`;$("#next").style.display="inline-block";$("#next").textContent=qi==Q.length-1?"🏁 See final results":"Next question ➡"}
+function move(n){if(!started)return;if(n>=Q.length){finish();return}if(n<0)return;qi=n;cur=qi%teams.length;$("#results").style.display="none";$("#qcard").style.display="block";showQ()}
+$("#next").onclick=()=>move(qi+1);$("#nextB").onclick=()=>move(qi+1);$("#prevB").onclick=()=>move(qi-1);
+$("#pauseB").onclick=()=>{paused=!paused;$("#pauseO").style.display=paused?"flex":"none";$("#pauseB").textContent=paused?"▶ Resume":"⏸ Pause"};
+$("#pauseO").onclick=()=>$("#pauseB").click();
+$("#showA").onclick=()=>{if(started)$("#fb").innerHTML=`<div class="fb ok"><b>Correct answer:</b> ${ansText(Q[qi])}<br>${Q[qi].e}</div>`};
+$("#finB").onclick=()=>started&&finish();
+$("#resetB").onclick=()=>{if(!confirm("Reset all scores and answers? Teams stay registered."))return;log=[];qi=0;cur=0;started=false;paused=false;$("#pauseO").style.display="none";$("#qcard").style.display="none";$("#results").style.display="none";$("#reg").style.display="block";Q.forEach(q=>{if(q.t=="order")do q.s=sh(q.a);while(q.s.join()==q.a.join())});refresh()};
+function finish(){$("#qcard").style.display="none";const r=$("#results");r.style.display="block";
+ const rk=teams.map((t,i)=>i).sort((x,y)=>scr(y)-scr(x)),top=scr(rk[0]),w=rk.filter(i=>scr(i)==top).map(i=>teams[i].n).join(" & ");
+ const ok=log.filter(l=>l.ok).length,pc=log.length?Math.round(ok/log.length*100):0,wr=log.filter(l=>!l.ok);
+ const hard=Q.map((q,i)=>({i,w:wr.filter(l=>l.q==i).length})).filter(x=>x.w);
+ const los=LO.map((n,k)=>{const a=log.filter(l=>Q[l.q].lo==k),c=a.filter(l=>l.ok).length,p=a.length?c/a.length:null;return`<tr><td>${n}</td><td>${p===null?"Not assessed":Math.round(p*100)+"% – "+(p>=.7?"✅ Achieved":"🔁 Needs revision")}</td></tr>`}).join("");
+ r.innerHTML=`<div class="win">🏆 Winning team: <b>${w||"–"}</b> with ${top} points! 🎉<br><small>Every team learned something today. Well done!</small></div>
+ <div class="card"><h3>📊 Class performance: ${pc}% correct (${ok} of ${log.length} answered)</h3><table><tr><th>Team</th><th>Score</th><th>Correct</th><th>Incorrect</th></tr>${rk.map((i,k)=>`<tr><td>#${k+1} ${teams[i].n} (${teams[i].a} &amp; ${teams[i].b})</td><td>${scr(i)}</td><td>${cnt(i,1)}</td><td>${cnt(i,0)}</td></tr>`).join("")}</table></div>
+ <div class="card"><h3>🎯 Learning objectives</h3><table>${los}</table></div>
+ <div class="card"><h3>🔁 Review mistakes and revise</h3>${hard.length?hard.sort((a,b)=>b.w-a.w).map(x=>`<p><b>Q${x.i+1}:</b> ${Q[x.i].q}<br>✔ <b>${ansText(Q[x.i])}</b> – ${Q[x.i].e}</p>`).join(""):"<p>No mistakes recorded. Fantastic!</p>"}</div>
+ <div class="card"><h3>🐍 Practical checklist</h3><p>${chk.filter(Boolean).length} of ${CL.length} items ticked on the Practical tab.</p><h3>💭 Reflection</h3><p><b>What did you learn today, and what would you like to improve next time?</b></p><textarea rows="3" placeholder="Type your reflection here…"></textarea><p><button class="btn" id="back">⬅ Back to game</button></p></div>`;
+ $("#back").onclick=()=>{r.style.display="none";$("#qcard").style.display="block";showQ()};beep(1);r.scrollIntoView()}
+const CODE=`# BOOK EXPLORER - Book Week project
+# Uses the free Open Library service (no API key needed)
+import json
+import urllib.parse
+import urllib.request
+
+# Sample data, used ONLY if the internet is not working
+DEMO = {
+    "author": "Lewis Carroll",
+    "bio": "Lewis Carroll was the pen name of Charles Lutwidge Dodgson, an English writer and maths teacher born in 1832.",
+    "facts": ["Born: 1832", "His real name was Charles Lutwidge Dodgson."],
+    "books": ["Through the Looking-Glass", "The Hunting of the Snark"],
+}
+
+
+def get_json(url):
+    """Ask a website for data and turn it into a Python dictionary."""
+    with urllib.request.urlopen(url, timeout=8) as reply:
+        return json.loads(reply.read().decode("utf-8"))
+
+
+def get_live_info(title):
+    """Search Open Library. Return None if the book is not found."""
+    search = "https://openlibrary.org/search.json?limit=1&q=" + urllib.parse.quote(title)
+    data = get_json(search)
+    if data["numFound"] == 0:
+        return None
+    book = data["docs"][0]
+    if "author_name" not in book or "author_key" not in book:
+        return None
+    name = book["author_name"][0]
+    author = get_json("https://openlibrary.org/authors/" + book["author_key"][0] + ".json")
+
+    bio = author.get("bio", "No biography was found on Open Library.")
+    if isinstance(bio, dict):          # sometimes the bio is stored in a dictionary
+        bio = bio.get("value", "")
+    facts = []
+    if "personal_name" in author:
+        facts.append("Full name: " + author["personal_name"])
+    if "birth_date" in author:
+        facts.append("Born: " + author["birth_date"])
+    if "death_date" in author:
+        facts.append("Died: " + author["death_date"])
+    if len(facts) == 0:
+        facts.append("No extra facts were found.")
+
+    other = []
+    works = "https://openlibrary.org/search.json?limit=10&fields=title&author=" + urllib.parse.quote(name)
+    for doc in get_json(works)["docs"]:
+        if doc["title"] != book["title"] and doc["title"] not in other:
+            other.append(doc["title"])
+    return {"author": name, "bio": bio[:400], "facts": facts, "books": other[:4]}
+
+
+def main():
+    print("BOOK EXPLORER")
+    print("Welcome to Book Explorer!")
+    title = input("Enter your favourite book: ").strip()   # input() stores the answer in 'title'
+    if title == "":
+        print("Please type a book name.")
+        return
+
+    live = True
+    try:
+        info = get_live_info(title)
+    except Exception:
+        info = DEMO                     # no internet: use sample data
+        live = False
+        print("No internet connection. Showing SAMPLE data (not checked, not about your book).")
+
+    if info is None:
+        print("Sorry, no book found. Try another title!")
+        return
+
+    print("Book found!" if live else "Demo mode")
+    print("Author: " + info["author"])
+    print("About the author:")
+    print(info["bio"])
+    print("Interesting facts:")
+    for fact in info["facts"]:
+        print("- " + fact)
+    print("Other books:")
+    if len(info["books"]) == 0:
+        print("- None found")
+    for book in info["books"]:
+        print("- " + book)
+    print("Thank you for exploring books with Python!")
+
+
+main()
+`;
+$("#code").textContent=CODE;
+$("#exp").textContent=`BOOK EXPLORER
+Welcome to Book Explorer!
+Enter your favourite book: Alice's Adventures in Wonderland
+Book found!
+Author: Lewis Carroll
+About the author:
+(A short biography from Open Library)
+Interesting facts:
+- Full name / Born / Died (if listed)
+Other books:
+- Other works by the same author
+Thank you for exploring books with Python!`;
+$("#copy").onclick=async()=>{let ok=false;try{await navigator.clipboard.writeText(CODE);ok=true}catch(e){try{const r=document.createRange();r.selectNode($("#code"));getSelection().removeAllRanges();getSelection().addRange(r);ok=document.execCommand("copy")}catch(e2){}}$("#cmsg").textContent=ok?"Copied! Paste into IDLE or Thonny.":"Code selected: press Ctrl+C to copy."};
+const CL=["Program shows “Welcome to Book Explorer!”","It asks for a book name with input()","A real book shows author, biography, facts and other books","A made-up title shows a friendly “not found” message","Switching off the internet shows SAMPLE demo mode","I improved the output and can explain my code"],chk=CL.map(()=>0);
+$("#cl").innerHTML=CL.map((c,i)=>`<label style="display:block;margin:4px 0"><input type="checkbox" data-k="${i}"> ${c}</label>`).join("");
+document.querySelectorAll("[data-k]").forEach(c=>c.onchange=()=>chk[+c.dataset.k]=c.checked?1:0);
+const now=new Date();$("#hd").textContent=now.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"});$("#vm").textContent=now.toLocaleDateString("en-GB",{month:"long"});
+const MM={game:1800,prac:1500};let tmode="game",tsec=1800,tint=null;
+function tshow(){$("#tv").textContent=tsec>0?String(tsec/60|0).padStart(2,"0")+":"+String(tsec%60).padStart(2,"0"):"Time’s up!";$("#tv").style.color=tint&&tsec<=60?"#ffc933":""}
+function tickReset(t){if(t!="screen")tmode=t;if(tint)return;tsec=MM[tmode];tshow()}
+function tstop(){clearInterval(tint);tint=null;$("#tb").textContent="▶"}
+$("#tb").onclick=()=>{if(tint){tstop();return}if(tsec<=0)tsec=MM[tmode];$("#tb").textContent="⏸";tint=setInterval(()=>{tsec--;if(tsec<=0){tsec=0;tstop();beep(0);beep(1)}tshow()},1000);tshow()};
+$("#tr").onclick=()=>{tstop();tsec=MM[tmode];tshow()};
+refresh();
+</script></body></html>
